@@ -1,0 +1,20 @@
+-- phpMyAdmin SQL Dump
+-- version 5.1.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Sep 11, 2021 at 08:05 AM
+-- Server version: 10.4.21-MariaDB
+-- PHP Version: 8.0.10
+
+create database testdb
+
+CREATE TABLE `tblaminal` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `Name` varchar(250) NOT NULL,
+  `Category` varchar(250) NOT NULL,
+  `Description` varchar(250) NOT NULL,
+  `Expectancy` varchar(250) NOT NULL,
+  `Image` varchar(500) NOT NULL,
+  `EntryDate` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
