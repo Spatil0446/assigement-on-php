@@ -1,11 +1,13 @@
 <?php
-require_once "db.php";
+//require_once "db.php";
 if(isset($_SESSION['user_id'])!="") {
-header("Location: dashboard.php");
+
 }
 $msg = '';
   
 if (isset($_POST['signup'])) {
+	if ($captchaResult == $checkTotal) {
+	echo $random_number1 . ' + ' . $random_number2 . ' = ';	
 	
 		
 	$var1 = rand(1111,9999);  // generate random number in $var1 variable
@@ -38,7 +40,12 @@ exit();
 echo "Error: " . $sql . "" . mysqli_error($conn);
 }
 }
+	
 mysqli_close($conn);
+	}
+	else{
+		echo "Captcha Wroung";
+	}
 }
 ?>
 <!DOCTYPE html>
@@ -59,7 +66,7 @@ mysqli_close($conn);
 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
 <label>Name</label> 
 <div class="form-group col-6">
-<input type="text" name="name" class="form-control" value="" maxlength="50" required="">
+<input type="text" name="name" id="txtname" class="form-control" value="" maxlength="50" required="">
 
 </div>
 <div class="form-group ">
@@ -112,10 +119,12 @@ mysqli_close($conn);
 <div class="form-group">
 <label>Enter Captcha</label>
 <div class="form-group col-6">
-     <input type="text" name="captcha" class="form-control" value="" maxlength="50" required="">      
+     <input name="captchaResult" type="text" size="2" />
+		<input name="firstNumber" type="hidden" value="<?php echo $random_number1; ?>" />
+		<input name="secondNumber" type="hidden" value="<?php echo $random_number2; ?>" />  
 
 <p><br />
-<img src="captcha.php?rand=<?php echo rand(); ?>" id='captcha_image'>
+
 
 </p>
 <p>Can't read the image?
@@ -123,7 +132,7 @@ mysqli_close($conn);
 to refresh</p>
 </div>
 <input type="submit" class="btn btn-primary" name="signup" value="submit">
-Already have a account?<a href="login.php" class="btn btn-default">Login</a>
+
 </form>
 </div>
 </div>    
